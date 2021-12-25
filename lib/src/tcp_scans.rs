@@ -44,8 +44,6 @@ pub fn tcp_timeout_scan(address:&str, ports:Vec<i32>, timeout:u64)->Result<Vec<i
     let mut open_port_vector:Vec<i32> = vec![];
     let duration = Duration::from_millis(timeout);
 
-
-
     for port in ports {
 
         let new_string = format!("{}:{}", address, port);
