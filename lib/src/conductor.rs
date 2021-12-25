@@ -9,7 +9,7 @@ use dns_lookup::{lookup_host};
 pub fn conduct_connect_scan(addr:&str, ports:Vec<i32>) ->Result<TcpScanRecord,io::Error> {
 
     let sanitized_host = host_sanitizer(addr);
-    let open_ports = tcp_connect_scan(sanitized_host.clone(), ports)?;
+    let open_ports = tcp_connect_scan(&sanitized_host, ports)?;
     let record = TcpScanRecord {
         host : sanitized_host,
         open_ports

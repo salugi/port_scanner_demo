@@ -9,7 +9,7 @@ use std::time::Duration;
 connect scan
 
  */
-pub fn tcp_connect_scan(address:String, ports:Vec<i32>)->Result<Vec<i32>, io::Error>{
+pub fn tcp_connect_scan(address:&str, ports:Vec<i32>)->Result<Vec<i32>, io::Error>{
 
     let mut open_port_vector:Vec<i32> = vec![];
     let duration = Duration::from_millis(80);
