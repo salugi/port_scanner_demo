@@ -48,7 +48,7 @@ pub fn conduct_host_lookup(addr:&str)->Result<Vec<String>, io::Error>{
 
 fn host_sanitizer(addr:&str)->String{
 
-    match IpAddr::from_str(&addr) {
+    match IpAddr::from_str(addr) {
 
         Err(_) => {
 

@@ -1,5 +1,4 @@
 use std::io;
-use std::io::{Read, Write};
 use std::net::{SocketAddr, TcpStream};
 use std::time::Duration;
 
@@ -19,10 +18,10 @@ pub fn tcp_connect_scan(address:String, ports:Vec<i32>)->Result<Vec<i32>, io::Er
 
     for port in ports {
 
-        let new_string = format!("{}:{}", address, port.to_string());
+        let new_string = format!("{}:{}", address, port);
         let server_details:SocketAddr = new_string.parse().expect("unable to parse");
 
-        if let Ok(_) = TcpStream::connect_timeout(&server_details,duration) {
+        if TcpStream::connect_timeout(&server_details,duration).is_ok() {
 
             open_port_vector.push(port);
 
@@ -49,10 +48,10 @@ pub fn tcp_timeout_scan(address:&str, ports:Vec<i32>, timeout:u64)->Result<Vec<i
 
     for port in ports {
 
-        let new_string = format!("{}:{}", address, port.to_string());
+        let new_string = format!("{}:{}", address, port);
         let server_details:SocketAddr = new_string.parse().expect("unable to parse");
 
-        if let Ok(_) = TcpStream::connect_timeout(&server_details,duration) {
+        if TcpStream::connect_timeout(&server_details,duration).is_ok() {
 
             open_port_vector.push(port);
 

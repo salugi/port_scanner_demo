@@ -1,6 +1,5 @@
 
 use lib::conductor::{conduct_timeout_scan, conduct_connect_scan, conduct_host_lookup};
-use std::env;
 
 fn main() {
 
