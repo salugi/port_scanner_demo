@@ -1,10 +1,19 @@
-use crate::tcp_scans::{tcp_connect_scan, tcp_timeout_scan};
+use crate::tcp_scans::{tcp_connect_scan, tcp_timeout_scan, tcp_send_string};
 use crate::records::TcpScanRecord;
 
-use std::{io};
-use std::net::{IpAddr};
-use std::str::{FromStr};
-use dns_lookup::{lookup_host};
+use std::io;
+use std::net::IpAddr;
+use std::str::FromStr;
+use dns_lookup::lookup_host;
+
+pub fn conduct_banner_grab(addr:&str, port:i32, msg:&str) ->Result<String,io::Error> {
+
+    let sanitized_host = host_sanitizer(addr);
+    let response = tcp_send_string(sanitized_host, port, msg, 80)?;
+
+    Ok(response)
+
+}
 
 pub fn conduct_connect_scan(addr:&str, ports:Vec<i32>) ->Result<TcpScanRecord,io::Error> {
 
@@ -34,7 +43,7 @@ pub fn conduct_timeout_scan(addr:&str, ports:Vec<i32>, timeout:u64) ->Result<Tcp
 
 pub fn conduct_host_lookup(addr:&str)->Result<Vec<String>, io::Error>{
 
-    let ip_vecs : Vec<std::net::IpAddr> = lookup_host(addr).unwrap();
+    let ip_vecs : Vec<IpAddr> = lookup_host(addr).unwrap();
     let mut return_array: Vec<String> = vec![];
 
     for ip in ip_vecs {

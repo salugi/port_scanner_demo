@@ -1,5 +1,5 @@
 
-use lib::conductor::{conduct_timeout_scan, conduct_connect_scan, conduct_host_lookup};
+use lib::conductor::{conduct_timeout_scan, conduct_connect_scan, conduct_host_lookup, conduct_banner_grab};
 
 fn main() {
 
@@ -11,5 +11,8 @@ fn main() {
 
     let record = conduct_timeout_scan("google.com",vec![80], 80);
     println!("{:?}", record);
+
+    let banner = conduct_banner_grab("google.com",443, "lol sup bro");
+    println!("{:?}", banner);
 
 }
